@@ -21,9 +21,7 @@ function createNextQuestion()
   for (var i=0; i<5; i++)  // create set of 2-digit answers, 1- or easy (10, 20, 50) 2-digit divisors, and calculate dividend
   {
     correctAnswers[i]=Math.floor(Math.random()*90)+10;
-    divisor=Math.floor(Math.random()*11)+2;
-    if (divisor==11) divisor=20;
-    if (divisor==12) divisor=50;
+    divisor=Math.floor(Math.random()*100)+2;
     questions[2*i+1]=divisor;
     questions[2*i]=questions[2*i+1]*correctAnswers[i];
   };
