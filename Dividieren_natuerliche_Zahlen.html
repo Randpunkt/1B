@@ -1,0 +1,94 @@
+<style type="text/css">
+
+body{
+	background-color: #FFFBCC;
+}
+</style>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script type="text/javascript">
+var questionNr=0;
+questions=new Array(10);
+correctAnswers=new Array(5);
+
+
+function createNextQuestion()
+{
+  questionNr++;
+  for (var i=0; i<5; i++)  // create set of 2-digit answers, 1- or easy (10, 20, 50) 2-digit divisors, and calculate dividend
+  {
+    correctAnswers[i]=Math.floor(Math.random()*90)+10;
+    divisor=Math.floor(Math.random()*11)+2;
+    if (divisor==11) divisor=20;
+    if (divisor==12) divisor=50;
+    questions[2*i+1]=divisor;
+    questions[2*i]=questions[2*i+1]*correctAnswers[i];
+  };
+  for (i=0; i<10; i++)  // write summands into table of questions
+  {
+    text="questionText"+i;
+    document.getElementById(text).firstChild.nodeValue=questions[i];
+  };
+  for (i=0; i<5; i++)  // set background of textfields back to white and clear the textfields
+  {
+    text="textbox"+i;
+    document.getElementById(text).style.backgroundColor="white";
+    document.forms[0].elements[i].value="";
+  };
+  document.getElementById("Ueberschrift").firstChild.nodeValue = questionNr;
+  document.getElementById("explanationframe1").style.display="none";
+  document.getElementById("explanationframe2").style.display="none";
+}
+
+function checkAnswers(numberOfAnswers)
+{
+  document.getElementById("explanationframe1").style.display="";
+  document.getElementById("explanationframe2").style.display="";
+  var text="Ihre Auswahl:";
+  for (i=0;i<numberOfAnswers;i++)
+  {
+    var idstr="textbox"+i;
+    if (document.forms[0].elements[i].value==correctAnswers[i]) document.getElementById(idstr).style.backgroundColor="lime";
+    else document.getElementById(idstr).style.backgroundColor="red";
+  }
+}
+</script>
+</head>
+<body>
+<script type="text/javascript">
+var frageNummer=0;
+</script>
+<div align="center">
+<h1>Natürliche Zahlen dividieren, Frage <span id="Ueberschrift">1</span>!</h1><br>
+<form name="Test" action="">
+  <p><h3>Berechne den Quotienten in der Zeile!</h3></p>
+  <p>
+  <table>
+    <tr align="right"><td><span id="questionText0">Text100</span></td><td>:</td><td><span id="questionText1">Text100</span></td><td>=</td><td><span id="textboxframe0"><input type="text" id="textbox0" size=5></span></td></tr>
+    <tr align="right"><td><span id="questionText2">Text100</span></td><td>:</td><td><span id="questionText3">Text100</span></td><td>=</td><td><span id="textboxframe1"><input type="text" id="textbox1" size=5></span></td></tr>
+    <tr align="right"><td><span id="questionText4">Text100</span></td><td>:</td><td><span id="questionText5">Text100</span></td><td>=</td><td><span id="textboxframe2"><input type="text" id="textbox2" size=5></span></td></tr>
+    <tr align="right"><td><span id="questionText6">Text100</span></td><td>:</td><td><span id="questionText7">Text100</span></td><td>=</td><td><span id="textboxframe3"><input type="text" id="textbox3" size=5></span></td></tr>
+    <tr align="right"><td><span id="questionText8">Text100</span></td><td>:</td><td><span id="questionText9">Text100</span></td><td>=</td><td><span id="textboxframe4"><input type="text" id="textbox4" size=5></span></td></tr>
+  </table>
+  </p>
+  <input type="button" value="&Uuml;berpr&uuml;fe deine Antwort!"
+    onclick="checkAnswers(5)">
+  <input type="button" value="Weiter zur n&auml;chsten Frage!"
+   onclick="createNextQuestion()">
+  <p>
+  <table>
+    <tr><td align="left"><span id="explanationframe1"><input type="text" id="explanationText1" size=1 style="background-color:lime" readonly> ... Antwort richtig!</span></td></tr>
+    <tr><td align="left"><span id="explanationframe2"><input type="text" id="explanationText1" size=1 style="background-color:red" readonly> ... Antwort leider nicht richtig!</span></td></tr>
+  </table>
+  </p>
+</form>
+<script type="text/javascript">
+createNextQuestion();
+</script>
+
+</div>
+</body>
+</html>
