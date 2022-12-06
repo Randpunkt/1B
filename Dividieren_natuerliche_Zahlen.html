@@ -20,10 +20,8 @@ function createNextQuestion()
   questionNr++;
   for (var i=0; i<5; i++)  // create set of 2-digit answers, 1- or easy (10, 20, 50) 2-digit divisors, and calculate dividend
   {
-    correctAnswers[i]=Math.floor(Math.random()*90)+10;
-    divisor=Math.floor(Math.random()*11)+2;
-    if (divisor==11) divisor=20;
-    if (divisor==12) divisor=50;
+    correctAnswers[i]=Math.floor(Math.random()*990)+10;
+    divisor=Math.floor(Math.random()*90)+12;
     questions[2*i+1]=divisor;
     questions[2*i]=questions[2*i+1]*correctAnswers[i];
   };
@@ -64,7 +62,8 @@ var frageNummer=0;
 <div align="center">
 <h1>Natürliche Zahlen dividieren, Frage <span id="Ueberschrift">1</span>!</h1><br>
 <form name="Test" action="">
-  <p><h3>Berechne den Quotienten in der Zeile!</h3></p>
+  <p><h3>Berechne den Quotienten!</h3></p>
+  <p><h3>Rechne auf einem Zettel und gib anschließend die richtige Antwort hier ein!</h3></p>	
   <p>
   <table>
     <tr align="right"><td><span id="questionText0">Text100</span></td><td>:</td><td><span id="questionText1">Text100</span></td><td>=</td><td><span id="textboxframe0"><input type="text" id="textbox0" size=5></span></td></tr>
